@@ -34,31 +34,31 @@ public class NGramDriver {
         job1.setOutputValueClass(IntWritable.class);
 
         //  input/output path/format
-        FileInputFormat.setInputPaths(job1, new Path("C:\\Users\\ysun52\\Hadoop_3X\\nine_chap_project_1_autocomplete\\bookList"));
-        FileOutputFormat.setOutputPath(job1, new Path("C:\\Users\\ysun52\\Hadoop_3X\\nine_chap_project_1_autocomplete\\out1"));
+        FileInputFormat.setInputPaths(job1, new Path("bookList"));
+        FileOutputFormat.setOutputPath(job1, new Path("running_output/out1"));
 
         // submit job
         job1.waitForCompletion(true);
 
-        // TODO: set up configuration for job2
-        // get job instance
-        Configuration conf2 = new Configuration();
-        conf2.set("topK", String.valueOf(6));
-        Job job2 = Job.getInstance(conf2);
-        job2.setJobName("LanguageModel");
-
-        // driver <> jar
-        job2.setJarByClass(NGramDriver.class);
-
-        // driver <> mapper/reducer
-        job2.setMapperClass(LanguageModelMapper.class);
-        job2.setReducerClass(LanguageModelReducer.class);
-
-        // driver <> mapper/reducer output kv
-        job1.setMapOutputKeyClass(Text.class);
-        job1.setMapOutputValueClass(Text.class);
-        job1.setOutputKeyClass(DBOutputWritable.class);
-        job1.setOutputValueClass(NullWritable.class);
+//        // TODO: set up configuration for job2
+//        // get job instance
+//        Configuration conf2 = new Configuration();
+//        conf2.set("topK", String.valueOf(6));
+//        Job job2 = Job.getInstance(conf2);
+//        job2.setJobName("LanguageModel");
+//
+//        // driver <> jar
+//        job2.setJarByClass(NGramDriver.class);
+//
+//        // driver <> mapper/reducer
+//        job2.setMapperClass(LanguageModelMapper.class);
+//        job2.setReducerClass(LanguageModelReducer.class);
+//
+//        // driver <> mapper/reducer output kv
+//        job1.setMapOutputKeyClass(Text.class);
+//        job1.setMapOutputValueClass(Text.class);
+//        job1.setOutputKeyClass(DBOutputWritable.class);
+//        job1.setOutputValueClass(NullWritable.class);
 
     }
 }
