@@ -17,6 +17,7 @@ public class NGramDriver {
         Configuration conf = new Configuration();
         conf.set("textinputformat.record.delimiter", ".");
         conf.set("noGram", String.valueOf(6));
+        conf.set("threshold", String.valueOf(20));
         Job job1 = Job.getInstance(conf);
         job1.setJobName("NGramBuilder");
 

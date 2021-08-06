@@ -1,5 +1,6 @@
 package com.autocomplete;
 
+import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
@@ -9,6 +10,13 @@ import java.io.IOException;
 public class NGramReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
 
     private IntWritable OutV = new IntWritable();
+    private int threshold;
+
+    @Override
+    protected void setup(Reducer<Text, IntWritable, Text, IntWritable>.Context context) throws IOException, InterruptedException {
+        Configuration conf2 = context.getConfiguration();
+        threshold = conf2.getInt("threshold", 20);
+    }
 
     @Override
     protected void reduce(Text key, Iterable<IntWritable> values, Reducer<Text, IntWritable, Text, IntWritable>.Context context) throws IOException, InterruptedException {
@@ -20,6 +28,6 @@ public class NGramReducer extends Reducer<Text, IntWritable, Text, IntWritable> 
         }
 
         OutV.set(sum);
-        context.write(key, OutV);
+        if (sum >= threshold) context.write(key, OutV);
     }
 }
