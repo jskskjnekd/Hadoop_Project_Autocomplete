@@ -42,7 +42,7 @@ public class LanguageModelReducer extends Reducer<Text, Text, DBOutputWritable, 
 
         // get topK words
         Iterator<Integer> iter = tm.keySet().iterator();
-        for (int j=0; j<topK && j<topK;){
+        for (int j=0; iter.hasNext() && j<topK;){
             int keyCount = iter.next();
             List<String> words = tm.get(keyCount);
             for (int i = 0; i < words.size() && j < topK; i++) {
